@@ -1,0 +1,10 @@
+{
+  "account_count": 10000,
+  "corrected_accounts": 100,
+  "full_recomputed": 10000,
+  "incremental_recomputed": 100,
+  "incremental_skipped": 9900,
+  "recomputation_reduction_percent": 99.0,
+  "full_seconds": 1.3082,
+  "incremental_seconds": 0.8072
+}

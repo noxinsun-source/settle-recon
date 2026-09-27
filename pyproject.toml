@@ -1,6 +1,6 @@
 [project]
 name = "settle-recon"
-version = "1.0.0"
+version = "2.0.0"
 description = "Deterministic securities settlement reconciliation service"
 requires-python = ">=3.9"
 dependencies = [
@@ -24,3 +24,5 @@ testpaths = ["tests"]
 line-length = 100
 target-version = "py39"
 
+[tool.setuptools]
+packages = ["app"]

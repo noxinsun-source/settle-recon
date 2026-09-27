@@ -5,6 +5,11 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request
 
+from app.incremental import (
+    AccountStatementInput,
+    BatchRebuildResult,
+    IncrementalStatementEngine,
+)
 from app.models import ReconciliationReport, ReconciliationRequest
 from app.reconcile import reconcile_batch
 from app.store import ReportStore
@@ -12,15 +17,19 @@ from app.store import ReportStore
 
 def create_app(database_path: str | None = None) -> FastAPI:
     store = ReportStore(database_path or os.getenv("SETTLE_RECON_DB", "data/reconciliation.db"))
+    statement_engine = IncrementalStatementEngine(
+        os.getenv("STATEMENT_RECON_DB", ":memory:") if database_path is None else ":memory:"
+    )
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         app.state.store = store
+        app.state.statement_engine = statement_engine
         yield
 
     app = FastAPI(
         title="SettleRecon",
-        version="1.0.0",
+        version="2.0.0",
         description="证券成交与清算记录的确定性对账及异常分流服务",
         lifespan=lifespan,
     )
@@ -45,8 +54,13 @@ def create_app(database_path: str | None = None) -> FastAPI:
             raise HTTPException(status_code=404, detail="未找到该对账批次")
         return report
 
+    @app.post("/v2/statements/rebuild", response_model=BatchRebuildResult)
+    def rebuild_statements(
+        inputs: list[AccountStatementInput], request: Request
+    ) -> BatchRebuildResult:
+        return request.app.state.statement_engine.rebuild_batch(inputs)
+
     return app
 
 
 app = create_app()
-
