@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: settle-recon
+Version: 1.0.0
+Summary: Deterministic securities settlement reconciliation service
+Requires-Python: >=3.9
+License-File: LICENSE
+Requires-Dist: fastapi<1,>=0.115
+Requires-Dist: pydantic<3,>=2.9
+Requires-Dist: uvicorn[standard]<1,>=0.30
+Provides-Extra: dev
+Requires-Dist: httpx<1,>=0.27; extra == "dev"
+Requires-Dist: pytest<9,>=8; extra == "dev"
+Requires-Dist: ruff<1,>=0.6; extra == "dev"
+Dynamic: license-file

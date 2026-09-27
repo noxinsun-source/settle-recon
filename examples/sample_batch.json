@@ -1,0 +1,50 @@
+{
+  "batch_id": "DEMO-20260926",
+  "amount_tolerance": "0.01",
+  "date_tolerance_days": 0,
+  "internal_trades": [
+    {
+      "trade_id": "T-001",
+      "account_id": "ACC-001",
+      "instrument": "600000.SH",
+      "side": "BUY",
+      "quantity": 100,
+      "price": "10.00",
+      "trade_date": "2026-09-25",
+      "expected_settlement_date": "2026-09-26"
+    },
+    {
+      "trade_id": "T-002",
+      "account_id": "ACC-002",
+      "instrument": "000001.SZ",
+      "side": "SELL",
+      "quantity": 200,
+      "price": "12.00",
+      "trade_date": "2026-09-25",
+      "expected_settlement_date": "2026-09-26"
+    }
+  ],
+  "clearing_records": [
+    {
+      "clearing_id": "C-001",
+      "trade_id": "T-001",
+      "account_id": "ACC-001",
+      "instrument": "600000.SH",
+      "side": "BUY",
+      "quantity": 100,
+      "net_amount": "1000.00",
+      "settlement_date": "2026-09-26"
+    },
+    {
+      "clearing_id": "C-002",
+      "trade_id": "T-002",
+      "account_id": "ACC-002",
+      "instrument": "000001.SZ",
+      "side": "SELL",
+      "quantity": 200,
+      "net_amount": "2398.00",
+      "settlement_date": "2026-09-26"
+    }
+  ]
+}
+
